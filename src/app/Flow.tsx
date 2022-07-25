@@ -7,7 +7,7 @@ import ReactFlow, {
   Edge,
   Background,
 } from "react-flow-renderer";
-import BTCNode from "./components/BTCNode";
+import BTCNode from "./components/BDCNode";
 const nodeTypes = { BTCNodeComponent: BTCNode };
 const initialNodes: Node[] = [
   {

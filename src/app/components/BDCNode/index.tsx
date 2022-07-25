@@ -2,9 +2,9 @@ import { useCallback, useState } from "react";
 import { Handle, Position } from "react-flow-renderer";
 import styles from "./styles.module.css";
 import NetworkPingIcon from "@mui/icons-material/NetworkPing";
-import BTCOptions from "./BTCOptions";
+import BTCOptions from "./BDCOptions";
 
-const BTCNodeComponent = ({ data }: any) => {
+const BDCNodeComponent = ({ data }: any) => {
   return (
     <div className={styles.BTCNode}>
       <div className={styles.BTCNode__header}>
@@ -38,4 +38,4 @@ const BTCNodeComponent = ({ data }: any) => {
 const primaryNode = { top: 61 };
 const secondaryNode = { top: 122 };
 
-export default BTCNodeComponent;
+export default BDCNodeComponent;
