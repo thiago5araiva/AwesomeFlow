@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-import BTCQuery from "../BDCNode/BDCQuery";
+import BTCQuery from "../RequestNode/trigger";
+
 const DrawerComponent = (): JSX.Element => {
   return (
     <div className={styles.drawer}>

@@ -1,32 +1,47 @@
-import React, { useCallback, useEffect, useReducer } from "react";
+import React, {useCallback, useEffect, useState} from "react"
 import ReactFlow, {
-  useNodesState,
-  useEdgesState,
   addEdge,
-  Node,
-  Edge,
+  applyEdgeChanges,
+  applyNodeChanges,
   Background,
-} from "react-flow-renderer";
-import BTCNode from "./components/BDCNode";
-const nodeTypes = { BTCNodeComponent: BTCNode };
-const initialNodes: Node[] = [
-  {
-    id: "1",
-    type: "BTCNodeComponent",
-    data: { label: "Node 1" },
-    position: { x: 5, y: 5 },
-  },
-];
-const initialEdges: Edge[] = [];
+  Connection,
+  Edge,
+  Node
+} from "react-flow-renderer"
+
+import {RootState, useAppSelector} from "./store/"
+import {nodeTypes} from './store/slices/nodes'
+
 
 const HorizontalFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState<Node[]>(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge[]>(initialEdges);
+  const node = useAppSelector((state:RootState) => state.node)
+  const edge = useAppSelector((state:RootState) => state.edge)
+  const [nodes, setNodes] = useState<Node[]>([])
+  const [edges, setEdges] = useState<Edge[]>([])
 
-  const onConnect = useCallback((params: any) => {
-    return setEdges((els) => addEdge(params, els));
-  }, []);
+  const onNodesChange = useCallback(
+    (changes: any) => setNodes((nds:Node[]) => {
+      return applyNodeChanges(changes, nds)
+    }),
+    [setNodes]
+  )
 
+  const onEdgesChange = useCallback(
+    (changes: any) => setEdges((eds:Edge[]) => applyEdgeChanges(changes, eds)),
+    [setEdges]
+  )
+
+  const onConnect = useCallback(
+    (params: Edge | Connection) => {
+      return setEdges((els: Edge[]) => addEdge(params, els))
+    },
+    [setEdges]
+  )
+  useEffect(()=>{
+    setNodes(node)
+    setEdges(edge)
+  },[node,edge])
+  
   return (
     <ReactFlow
       nodes={nodes}
@@ -40,7 +55,7 @@ const HorizontalFlow = () => {
     >
       <Background gap={24} size={1} />
     </ReactFlow>
-  );
-};
+  )
+}
 
-export default HorizontalFlow;
+export default HorizontalFlow

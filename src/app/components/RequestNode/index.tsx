@@ -1,9 +1,8 @@
-import { useCallback, useState } from "react";
-import { Handle, Position } from "react-flow-renderer";
-import styles from "./styles.module.css";
+import {useState} from "react";
+import {Handle, Position} from "react-flow-renderer";
 import NetworkPingIcon from "@mui/icons-material/NetworkPing";
-import BTCOptions from "./BDCOptions";
-import {Typography} from "@mui/material";
+import BTCOptions from "./options";
+import styles from "./styles.module.css";
 
 const BDCNodeComponent = ({ data }: any) => {
     const [open, setOpen] = useState(false);
