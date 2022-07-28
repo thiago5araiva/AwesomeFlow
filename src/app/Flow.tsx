@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react"
+import React, { useCallback, useEffect, useState } from "react";
 import ReactFlow, {
   addEdge,
   applyEdgeChanges,
@@ -6,42 +6,49 @@ import ReactFlow, {
   Background,
   Connection,
   Edge,
-  Node
-} from "react-flow-renderer"
+  MiniMap,
+  Node,
+} from "react-flow-renderer";
 
-import {RootState, useAppSelector} from "./store/"
-import {nodeTypes} from './store/slices/nodes'
-
+import { RootState, useAppDispatch, useAppSelector } from "./store/";
+import { types, updateNode } from "./store/slices/nodes";
 
 const HorizontalFlow = () => {
-  const node = useAppSelector((state:RootState) => state.node)
-  const edge = useAppSelector((state:RootState) => state.edge)
-  const [nodes, setNodes] = useState<Node[]>([])
-  const [edges, setEdges] = useState<Edge[]>([])
+  const dispatch = useAppDispatch();
+  const node = useAppSelector((state: RootState) => state.node);
+  const edge = useAppSelector((state: RootState) => state.edge);
+
+  const [nodes, setNodes] = useState<Node[]>([]);
+  const [edges, setEdges] = useState<Edge[]>([]);
 
   const onNodesChange = useCallback(
-    (changes: any) => setNodes((nds:Node[]) => {
-      return applyNodeChanges(changes, nds)
-    }),
-    [setNodes]
-  )
+    (changes: any) => {
+      setNodes((nds: Node[]) => applyNodeChanges(changes, nds));
+    },
+    [nodes]
+  );
 
   const onEdgesChange = useCallback(
-    (changes: any) => setEdges((eds:Edge[]) => applyEdgeChanges(changes, eds)),
+    (changes: any) => setEdges((eds: Edge[]) => applyEdgeChanges(changes, eds)),
     [setEdges]
-  )
+  );
 
   const onConnect = useCallback(
     (params: Edge | Connection) => {
-      return setEdges((els: Edge[]) => addEdge(params, els))
+      return setEdges((els: Edge[]) => addEdge(params, els));
     },
     [setEdges]
-  )
-  useEffect(()=>{
-    setNodes(node)
-    setEdges(edge)
-  },[node,edge])
-  
+  );
+  useEffect(() => {
+    setNodes(node);
+    setEdges(edge);
+  }, [node, edge]);
+
+  useEffect(() => {
+    dispatch(updateNode(nodes));
+    setNodes(node);
+  }, []);
+
   return (
     <ReactFlow
       nodes={nodes}
@@ -49,13 +56,14 @@ const HorizontalFlow = () => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      nodeTypes={nodeTypes}
+      nodeTypes={types}
       fitView
       attributionPosition="bottom-left"
     >
       <Background gap={24} size={1} />
+      <MiniMap />
     </ReactFlow>
-  )
-}
+  );
+};
 
 export default HorizontalFlow

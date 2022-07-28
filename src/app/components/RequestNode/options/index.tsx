@@ -62,6 +62,15 @@ const RequestNodeOptions = ({ open, handleClose }: any): JSX.Element => {
               variant="standard"
               onChange={handleChange}
             />
+            <TextField
+              name="token"
+              value={token}
+              fullWidth
+              id="standard-basic"
+              label="Token"
+              variant="standard"
+              onChange={handleChange}
+            />
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Method</InputLabel>
               <Select
@@ -78,15 +87,7 @@ const RequestNodeOptions = ({ open, handleClose }: any): JSX.Element => {
                 <MenuItem value="DELETE">DELETE</MenuItem>
               </Select>
             </FormControl>
-            <TextField
-              name="token"
-              value={token}
-              fullWidth
-              id="standard-basic"
-              label="Token"
-              variant="standard"
-              onChange={handleChange}
-            />
+
             <TextField
               name="headers"
               value={headers}

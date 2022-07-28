@@ -1,31 +1,46 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { Node } from "react-flow-renderer";
 import { Button } from "@mui/material";
 import SyncAltOutlinedIcon from "@mui/icons-material/SyncAltOutlined";
 import overrideCSS from "./overrideCSS";
-
+import { v4 as uuid } from "uuid";
 import { useAppDispatch } from "../../../store/";
-import { addNode } from "../../../store/slices/nodes";
+import { addRequestNode } from "../../../store/slices/nodes";
 
-const BTCQueryComponent = () => {
+const NodeRequestTrigger = () => {
   const dispatch = useAppDispatch();
+  const [node, setNode] = useState<Node[]>([]);
 
-  const RequestNodeType = {
-    id: "1",
-    type: "RequestNodeType",
-    data: { label: "Node 1" },
-    position: { x: 5, y: 5 },
+  const handleNode = () => {
+    const RequestNodeType = {
+      id: uuid(),
+      type: "RequestNodeType",
+      data: {
+        label: "Request",
+        fields: {
+          name: "",
+          url: "",
+          method: "",
+          token: "",
+          headers: "",
+          body: "",
+        },
+      },
+      position: { x: Math.random() * 9, y: Math.random() * 9 },
+    };
+    setNode((prevState) => [RequestNodeType]);
+    dispatch(addRequestNode(node));
   };
   return (
     <Button
       variant="outlined"
       endIcon={<SyncAltOutlinedIcon />}
       sx={overrideCSS.button}
-      onClick={() => dispatch(addNode(RequestNodeType))}
+      onClick={handleNode}
     >
       Request
     </Button>
   );
 };
 
-export default BTCQueryComponent;
+export default NodeRequestTrigger;
