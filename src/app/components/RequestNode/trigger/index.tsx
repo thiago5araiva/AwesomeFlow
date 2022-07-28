@@ -1,46 +1,25 @@
-import React, { useState } from "react";
-import { Node } from "react-flow-renderer";
-import { Button } from "@mui/material";
-import SyncAltOutlinedIcon from "@mui/icons-material/SyncAltOutlined";
-import overrideCSS from "./overrideCSS";
-import { v4 as uuid } from "uuid";
-import { useAppDispatch } from "../../../store/";
-import { addRequestNode } from "../../../store/slices/nodes";
+import SyncAltOutlinedIcon from '@mui/icons-material/SyncAltOutlined';
+import { Button } from '@mui/material';
+import { FC } from 'react';
+import { Node } from 'react-flow-renderer';
+import overrideCSS from './overrideCSS';
 
-const NodeRequestTrigger = () => {
-  const dispatch = useAppDispatch();
-  const [node, setNode] = useState<Node[]>([]);
+interface INodeTrigger {
+  handleNode(node: Node): void;
+  node: Node;
+}
 
-  const handleNode = () => {
-    const RequestNodeType = {
-      id: uuid(),
-      type: "RequestNodeType",
-      data: {
-        label: "Request",
-        fields: {
-          name: "",
-          url: "",
-          method: "",
-          token: "",
-          headers: "",
-          body: "",
-        },
-      },
-      position: { x: Math.random() * 9, y: Math.random() * 9 },
-    };
-    setNode((prevState) => [RequestNodeType]);
-    dispatch(addRequestNode(node));
-  };
+const NodeTrigger: FC<INodeTrigger> = ({ handleNode, node }) => {
   return (
     <Button
       variant="outlined"
       endIcon={<SyncAltOutlinedIcon />}
       sx={overrideCSS.button}
-      onClick={handleNode}
+      onClick={() => handleNode(node)}
     >
-      Request
+      {node.data.label}
     </Button>
   );
 };
 
-export default NodeRequestTrigger;
+export default NodeTrigger;

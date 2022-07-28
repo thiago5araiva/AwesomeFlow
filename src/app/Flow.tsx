@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from 'react';
 import ReactFlow, {
   addEdge,
   applyEdgeChanges,
@@ -8,24 +8,19 @@ import ReactFlow, {
   Edge,
   MiniMap,
   Node,
-} from "react-flow-renderer";
+} from 'react-flow-renderer';
+import DrawerComponent from './components/Drawer';
 
-import { RootState, useAppDispatch, useAppSelector } from "./store/";
-import { types, updateNode } from "./store/slices/nodes";
+import { types } from './store/flow/Slice';
 
 const HorizontalFlow = () => {
-  const dispatch = useAppDispatch();
-  const node = useAppSelector((state: RootState) => state.node);
-  const edge = useAppSelector((state: RootState) => state.edge);
-
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
   const onNodesChange = useCallback(
-    (changes: any) => {
-      setNodes((nds: Node[]) => applyNodeChanges(changes, nds));
-    },
-    [nodes]
+    (changes: any) => setNodes((nds: Node[]) => applyNodeChanges(changes, nds)),
+
+    [setNodes]
   );
 
   const onEdgesChange = useCallback(
@@ -39,31 +34,29 @@ const HorizontalFlow = () => {
     },
     [setEdges]
   );
-  useEffect(() => {
-    setNodes(node);
-    setEdges(edge);
-  }, [node, edge]);
 
-  useEffect(() => {
-    dispatch(updateNode(nodes));
-    setNodes(node);
-  }, []);
+  const handleNode = (node: Node) => {
+    setNodes((prevState) => [...prevState, node]);
+  };
 
   return (
-    <ReactFlow
-      nodes={nodes}
-      edges={edges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-      nodeTypes={types}
-      fitView
-      attributionPosition="bottom-left"
-    >
-      <Background gap={24} size={1} />
-      <MiniMap />
-    </ReactFlow>
+    <>
+      <DrawerComponent handleNode={handleNode} />
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        nodeTypes={types}
+        fitView
+        attributionPosition="bottom-left"
+      >
+        <Background gap={24} size={1} />
+        <MiniMap />
+      </ReactFlow>
+    </>
   );
 };
 
-export default HorizontalFlow
+export default HorizontalFlow;

@@ -1,9 +1,48 @@
-import React from "react";
-import styles from "./styles.module.css";
+import { FC } from 'react';
+import { Node } from 'react-flow-renderer';
+import { v4 as uuid } from 'uuid';
+import ButtonTrigger from '../RequestNode/trigger';
+import styles from './styles.module.css';
 
-import BTCQuery from "../RequestNode/trigger";
+interface IDrawerComponent {
+  handleNode(node: Node): void;
+}
 
-const DrawerComponent = (): JSX.Element => {
+const nodes: Array<Node> = [
+  {
+    id: uuid(),
+    type: 'RequestNodeType',
+    data: {
+      label: 'Request',
+      fields: {
+        name: '',
+        url: '',
+        method: '',
+        token: '',
+        headers: '',
+        body: '',
+      },
+    },
+    position: { x: 130, y: 130 },
+  },
+  {
+    id: uuid(),
+    data: {
+      label: 'Condition',
+      fields: {
+        name: '',
+        url: '',
+        method: '',
+        token: '',
+        headers: '',
+        body: '',
+      },
+    },
+    position: { x: 5, y: 5 },
+  },
+];
+
+const DrawerComponent: FC<IDrawerComponent> = ({ handleNode }) => {
   return (
     <div className={styles.drawer}>
       <div className={styles.drawer__children}>
@@ -14,7 +53,13 @@ const DrawerComponent = (): JSX.Element => {
           <div className={styles.categories__header}>Ações</div>
           <div className={styles.drawer__options}>
             <div>
-              <BTCQuery />
+              {nodes.map((node) => (
+                <ButtonTrigger
+                  handleNode={handleNode}
+                  node={node}
+                  key={node.id}
+                />
+              ))}
             </div>
           </div>
         </div>
