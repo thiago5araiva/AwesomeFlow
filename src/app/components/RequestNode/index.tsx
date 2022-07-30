@@ -1,23 +1,27 @@
-import { useState } from "react";
-import { Handle, Position } from "react-flow-renderer";
-import NetworkPingIcon from "@mui/icons-material/NetworkPing";
-import Options from "./options";
-import styles from "./styles.module.css";
-import { Typography } from "@mui/material";
+import { useState } from "react"
+import { Handle, Position } from "react-flow-renderer"
+import Options from "./Opitons"
+
+import { Typography } from "@mui/material"
+import { SettingsOutlined } from "@mui/icons-material/"
+import styles from "./styles.module.css"
 
 const RequestNode = (): JSX.Element => {
-  const [open, setOpen] = useState(false);
-  const handleModal = () => setOpen(!open);
+  const [open, setOpen] = useState(false)
+  const handleModal = () => setOpen(!open)
+
+  const icon = (
+    <SettingsOutlined sx={{ color: "white" }} onClick={handleModal} />
+  )
+
   return (
     <div className={styles.NodeRequest}>
       <div className={styles.NodeRequest__header}>
         <small>Request</small>
-        <NetworkPingIcon sx={{ color: "white" }} />
+        {icon}
       </div>
       <div className={styles.NodeRequest__description}>
-        <Typography sx={{ fontFamily: "Exo" }} onClick={handleModal}>
-          Escolha sua URL
-        </Typography>
+        <Typography sx={{ fontFamily: "Exo" }}>Escolha sua URL</Typography>
         <Options
           open={open}
           handleOpen={handleModal}
@@ -41,10 +45,10 @@ const RequestNode = (): JSX.Element => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-const primaryNode = { top: 61 };
-const secondaryNode = { top: 122 };
+const primaryNode = { top: 61 }
+const secondaryNode = { top: 122 }
 
-export default RequestNode;
+export default RequestNode

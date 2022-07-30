@@ -1,46 +1,47 @@
-import { FC } from 'react';
-import { Node } from 'react-flow-renderer';
-import { v4 as uuid } from 'uuid';
-import ButtonTrigger from '../RequestNode/trigger';
-import styles from './styles.module.css';
+import { FC } from "react"
+import { Node } from "react-flow-renderer"
+import { v4 as uuid } from "uuid"
+import ButtonTrigger from "../ButtonTrigger"
+import styles from "./styles.module.css"
 
 interface IDrawerComponent {
-  handleNode(node: Node): void;
+  handleNode(node: Node): void
 }
 
 const nodes: Array<Node> = [
   {
     id: uuid(),
-    type: 'RequestNodeType',
+    type: "RequestNodeType",
     data: {
-      label: 'Request',
+      label: "Request",
       fields: {
-        name: '',
-        url: '',
-        method: '',
-        token: '',
-        headers: '',
-        body: '',
+        name: "",
+        url: "",
+        method: "",
+        token: "",
+        headers: "",
+        body: "",
       },
     },
     position: { x: 130, y: 130 },
   },
   {
     id: uuid(),
+    type: "ConditionalNodeType",
     data: {
-      label: 'Condition',
+      label: "Condition",
       fields: {
-        name: '',
-        url: '',
-        method: '',
-        token: '',
-        headers: '',
-        body: '',
+        name: "",
+        url: "",
+        method: "",
+        token: "",
+        headers: "",
+        body: "",
       },
     },
     position: { x: 5, y: 5 },
   },
-];
+]
 
 const DrawerComponent: FC<IDrawerComponent> = ({ handleNode }) => {
   return (
@@ -65,7 +66,7 @@ const DrawerComponent: FC<IDrawerComponent> = ({ handleNode }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DrawerComponent;
+export default DrawerComponent

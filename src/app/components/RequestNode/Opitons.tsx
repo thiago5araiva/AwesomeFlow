@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
+import React, { useState } from "react"
+import Box from "@mui/material/Box"
+import Modal from "@mui/material/Modal"
 import {
   FormControl,
   InputLabel,
@@ -9,30 +9,29 @@ import {
   SelectChangeEvent,
   Stack,
   TextField,
-} from "@mui/material";
-import styles from "./styles";
+} from "@mui/material"
 
 const RequestNodeOptions = ({ open, handleClose }: any): JSX.Element => {
-  const [method, setMethod] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [url, setUrl] = useState<string>("");
-  const [token, setToken] = useState<string>("");
-  const [headers, setHeaders] = useState<string>("");
-  const [body, setBody] = useState<string>("");
+  const [method, setMethod] = useState<string>("")
+  const [name, setName] = useState<string>("")
+  const [url, setUrl] = useState<string>("")
+  const [token, setToken] = useState<string>("")
+  const [headers, setHeaders] = useState<string>("")
+  const [body, setBody] = useState<string>("")
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const type = event.target.name as string;
-    const value = event.target.value as string;
-    type === "name" && setName(value);
-    type === "url" && setUrl(value);
-    type === "token" && setToken(value);
-    type === "headers" && setHeaders(value);
-    type === "body" && setBody(value);
-  };
+    const type = event.target.name as string
+    const value = event.target.value as string
+    type === "name" && setName(value)
+    type === "url" && setUrl(value)
+    type === "token" && setToken(value)
+    type === "headers" && setHeaders(value)
+    type === "body" && setBody(value)
+  }
 
   const handleSelectChange = (event: SelectChangeEvent) => {
-    setMethod(event.target.value as string);
-  };
+    setMethod(event.target.value as string)
+  }
 
   return (
     <div>
@@ -112,7 +111,21 @@ const RequestNodeOptions = ({ open, handleClose }: any): JSX.Element => {
         </Box>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default RequestNodeOptions;
+const styles = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+  "&:focus-visible": {
+    outline: "none",
+  },
+}
+
+export default RequestNodeOptions

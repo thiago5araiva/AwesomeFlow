@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Edge, Node } from 'react-flow-renderer';
 import RequestNode from '../../components/RequestNode';
+import ConditionalNode from "../../components/ConditionalNode";
 
 interface IInitialstate {
   nodes: Node[];
   edges: Edge[];
 }
 
-export const types = { RequestNodeType: RequestNode };
+export const types = { RequestNodeType: RequestNode, ConditionalNodeType: ConditionalNode };
 
 const initialState: IInitialstate = {
   nodes: [],

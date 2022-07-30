@@ -19,7 +19,6 @@ const HorizontalFlow = () => {
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds: Node[]) => applyNodeChanges(changes, nds)),
-
     [setNodes]
   );
 
