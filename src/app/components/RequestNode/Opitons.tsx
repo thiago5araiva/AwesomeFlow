@@ -1,74 +1,78 @@
 import React, { useState } from "react"
 import Box from "@mui/material/Box"
 import Modal from "@mui/material/Modal"
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Stack,
-  TextField,
-} from "@mui/material"
+import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField, } from "@mui/material"
 
-const RequestNodeOptions = ({ open, handleClose }: any): JSX.Element => {
-  const [method, setMethod] = useState<string>("")
-  const [name, setName] = useState<string>("")
-  const [url, setUrl] = useState<string>("")
-  const [token, setToken] = useState<string>("")
-  const [headers, setHeaders] = useState<string>("")
-  const [body, setBody] = useState<string>("")
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+type ValueProps = {
+  [key: string]: string
+}
+
+const RequestNodeOptions = ( { open, handleClose }: any ): JSX.Element => {
+  const [ state, stateSet ] = useState<ValueProps>({
+    method: 'GET',
+    name: 'Request',
+    url: 'https://',
+    token: '',
+    headers: '',
+    body: ''
+  })
+
+
+  const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
     const type = event.target.name as string
     const value = event.target.value as string
-    type === "name" && setName(value)
-    type === "url" && setUrl(value)
-    type === "token" && setToken(value)
-    type === "headers" && setHeaders(value)
-    type === "body" && setBody(value)
+    stateSet(( prevState: ValueProps ) => {
+      return ({ ...prevState, [type]: value })
+    })
   }
 
-  const handleSelectChange = (event: SelectChangeEvent) => {
-    setMethod(event.target.value as string)
+  const handleSelectChange = ( event: SelectChangeEvent ) => {
+    stateSet(( prevState: ValueProps ) => {
+      const value = event.target.value as string
+      return ({ ...prevState, method: value })
+    })
   }
-
+  const handleSave = () => {
+    const globalState = {}
+    return handleClose()
+  }
   return (
     <div>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={ open }
+        onClose={ handleClose }
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={styles}>
-          <Stack spacing={3}>
+        <Box sx={ styles }>
+          <Stack spacing={ 3 }>
             <TextField
               name="name"
-              value={name}
+              value={ state.value }
               fullWidth
               id="standard-basic"
               label="Name"
               variant="standard"
-              onChange={handleChange}
+              onChange={ handleChange }
             />
             <TextField
               name="url"
-              value={url}
+              value={ state.url }
               fullWidth
               id="standard-basic"
               label="URL"
               variant="standard"
-              onChange={handleChange}
+              onChange={ handleChange }
             />
             <TextField
               name="token"
-              value={token}
+              value={ state.token }
               fullWidth
               id="standard-basic"
               label="Token"
               variant="standard"
-              onChange={handleChange}
+              onChange={ handleChange }
             />
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Method</InputLabel>
@@ -76,9 +80,9 @@ const RequestNodeOptions = ({ open, handleClose }: any): JSX.Element => {
                 name="select"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={method}
+                value={ state.method }
                 label="Method"
-                onChange={handleSelectChange}
+                onChange={ handleSelectChange }
               >
                 <MenuItem value="GET">GET</MenuItem>
                 <MenuItem value="POST">POST</MenuItem>
@@ -89,24 +93,25 @@ const RequestNodeOptions = ({ open, handleClose }: any): JSX.Element => {
 
             <TextField
               name="headers"
-              value={headers}
+              value={ state.headers }
               id="outlined-multiline-flexible"
               label="Headers"
               multiline
               fullWidth
-              maxRows={6}
-              onChange={handleChange}
+              maxRows={ 6 }
+              onChange={ handleChange }
             />
             <TextField
               name="body"
-              value={body}
+              value={ state.body }
               id="outlined-multiline-flexible"
               label="Body"
               multiline
               fullWidth
-              maxRows={6}
-              onChange={handleChange}
+              maxRows={ 6 }
+              onChange={ handleChange }
             />
+            <Button variant="contained" fullWidth onClick={ handleSave }> Salvar</Button>
           </Stack>
         </Box>
       </Modal>

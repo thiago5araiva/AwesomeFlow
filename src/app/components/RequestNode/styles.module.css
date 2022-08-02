@@ -1,45 +1,25 @@
 .NodeRequest {
-  width: 267px;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-}
-
-.NodeRequest__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #576673;
-  padding: 3px 15px;
-}
-
-.NodeRequest__header small {
-  font-size: 14px;
-  color: #fff;
-}
-
-.NodeRequest__description {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 0 0 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
 }
 
 .NodeRequest__status {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .NodeRequest__status div {
-  padding: 20px 15px;
+    padding: 20px 15px;
 }
 
 .NodeRequest__success {
-  background-color: #08a440;
-  color: #fff;
+    background-color: #08a440;
+    color: #fff;
 }
 
 .NodeRequest__error {
-  background-color: #fa3e3e;
-  color: #fff;
+    background-color: #fa3e3e;
+    color: #fff;
 }

@@ -1,29 +1,35 @@
 .node {
-  width: 167px;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    width: 167px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 }
+
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #576673;
-  padding: 3px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #576673;
+    padding: 3px 15px;
 }
+
 .body {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 9px 0 9px 15px;
+    background-color: #ffffff;
+    padding: 9px 0 9px 15px;
+}
+
+.title {
+    font-family: 'Exo', sans-serif;
+    padding: 24px 0;
 }
 
 .large {
-  width: 267px;
+    width: 267px;
 }
+
 .medium {
-  width: 167px;
+    width: 167px;
 }
+
 .small {
-  width: 67px;
+    width: 67px;
 }

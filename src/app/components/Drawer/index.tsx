@@ -8,7 +8,7 @@ interface IDrawerComponent {
   handleNode(node: Node): void
 }
 
-const nodes: Array<Node> = [
+export const nodes: Array<Node> = [
   {
     id: uuid(),
     type: "RequestNodeType",
