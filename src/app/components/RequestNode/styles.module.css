@@ -1,29 +1,8 @@
 .NodeRequest {
-    width: 267px;
-    background-color: #fff;
-}
-
-.NodeRequest__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #576673;
-    padding: 3px 15px;
-}
-
-.NodeRequest__header small {
-    font-size: 14px;
-    color: #fff;
-}
-
-.NodeRequest__description {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-    padding: 0 0 0 15px;
-
+    padding-left: 24px;
 }
 
 .NodeRequest__status {
@@ -36,7 +15,7 @@
 }
 
 .NodeRequest__success {
-    background-color: #08A440;
+    background-color: #08a440;
     color: #fff;
 }
 
