@@ -1,0 +1,16 @@
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-bottom: 9px;
+    padding-top: 9px;
+}
+
+.conditions {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 24px;
+    width: 24px;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { Fragment, useState } from "react"
 import Box from "@mui/material/Box"
 import Modal from "@mui/material/Modal"
 import {
@@ -20,7 +20,7 @@ type ParamsProps = {
   param2: string
 }
 
-const ConditionalNodeOptions = ( { open, handleClose }: any ): JSX.Element => {
+const ConditionalNodeOptions = ( { open, close, options }: any ): JSX.Element => {
   const [ name, setName ] = useState<string>("Condicional")
   const [ data, dataSet ] = useState<ParamsProps[]>([ {
     param1: '',
@@ -53,10 +53,11 @@ const ConditionalNodeOptions = ( { open, handleClose }: any ): JSX.Element => {
       name,
       data
     }
-    return handleClose()
+    options(globalState)
+    return close()
   }
   const handleAdd = () => {
-    return dataSet(( prevState ) => ([ ...prevState, {
+    return dataSet(( prevState: ParamsProps[] ) => ([ ...prevState, {
       param1: '',
       condition: '',
       param2: ''
@@ -66,7 +67,7 @@ const ConditionalNodeOptions = ( { open, handleClose }: any ): JSX.Element => {
     <div>
       <Modal
         open={ open }
-        onClose={ handleClose }
+        onClose={ close }
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -84,7 +85,7 @@ const ConditionalNodeOptions = ( { open, handleClose }: any ): JSX.Element => {
             <Typography>Você pode Adicionar suas condições aqui </Typography>
             <Grid rowSpacing={ 2 } container sx={ { justifyContent: "space-between" } }>
               { data.map(( param: any, index: number ) => (
-                <>
+                <Fragment key={ index }>
                   <Grid item xs={ 3 } key={ index }>
                     <TextField
                       name="param1"
@@ -141,7 +142,7 @@ const ConditionalNodeOptions = ( { open, handleClose }: any ): JSX.Element => {
                       onChange={ ( event: React.ChangeEvent<HTMLInputElement> ) => handleChange(event, index) }
                     />
                   </Grid>
-                </>
+                </Fragment>
               )) }
             </Grid>
             <Grid container sx={ { justifyContent: 'space-between' } }>

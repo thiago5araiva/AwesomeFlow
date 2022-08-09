@@ -1,11 +1,11 @@
-import { FC } from "react"
+import { FC, memo } from "react"
 import { Node } from "react-flow-renderer"
 import { v4 as uuid } from "uuid"
 import ButtonTrigger from "../ButtonTrigger"
 import styles from "./styles.module.css"
 
 interface IDrawerComponent {
-  handleNode(node: Node): void
+  handleNode( node: Node ): void
 }
 
 export const nodes: Array<Node> = [
@@ -43,24 +43,24 @@ export const nodes: Array<Node> = [
   },
 ]
 
-const DrawerComponent: FC<IDrawerComponent> = ({ handleNode }) => {
+const DrawerComponent: FC<IDrawerComponent> = ( { handleNode } ) => {
   return (
-    <div className={styles.drawer}>
-      <div className={styles.drawer__children}>
-        <h2 className={styles.drawer__title}>
+    <div className={ styles.drawer }>
+      <div className={ styles.drawer__children }>
+        <h2 className={ styles.drawer__title }>
           Clique e adicione um nó para inserir no fluxo.
         </h2>
-        <div className={styles.drawer__categories}>
-          <div className={styles.categories__header}>Ações</div>
-          <div className={styles.drawer__options}>
+        <div className={ styles.drawer__categories }>
+          <div className={ styles.categories__header }>Ações</div>
+          <div className={ styles.drawer__options }>
             <div>
-              {nodes.map((node) => (
+              { nodes.map(( node ) => (
                 <ButtonTrigger
-                  handleNode={handleNode}
-                  node={node}
-                  key={node.id}
+                  handleNode={ handleNode }
+                  node={ node }
+                  key={ node.id }
                 />
-              ))}
+              )) }
             </div>
           </div>
         </div>
@@ -69,4 +69,4 @@ const DrawerComponent: FC<IDrawerComponent> = ({ handleNode }) => {
   )
 }
 
-export default DrawerComponent
+export default memo(DrawerComponent)
